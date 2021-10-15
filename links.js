@@ -1,28 +1,25 @@
 const fs = require("fs");
-const marked = require('marked');
-const { JSDOM } = require("jsdom");
-const path = require("path");
+const marked = require("marked");
+const renderer = new marked.Renderer();
+const dir = require("./files");
+const arr = dir.directorios(process.argv[2]);
 
 let arrayLinks = [];
 
 const links = (file) => {
-  file.forEach(item => {
+  file.forEach((item) => {
     const mdFile = fs.readFileSync(item, "utf-8");
-    const html = marked(mdFile);
-    const dom = new JSDOM(html);
 
-    dom.window.document.querySelectorAll('a').forEach(a=>{
-      const url = a.href;
-      const text = a.textContent;
-
-      if(!url.startsWith('about:blank#')){ 
-        arrayLinks.push({href: url, text: text, file: item});
+    renderer.link = (href, ordered, text) => {
+      if (href.startsWith("http") == true && text.includes("<img") == false) {
+        arrayLinks.push({ href: href, text: text.substr(0, 49), file: item });
       }
-    });
+    };
+    marked(mdFile, { renderer });
   });
- 
- return arrayLinks;
+  return arrayLinks;
 };
+links(arr);
 
 module.exports = {
   links,

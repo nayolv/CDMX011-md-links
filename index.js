@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const validate = require("./validate.js");
+/*const validate = require("./validate.js");
 const stadistics = require('./stats');
 const urls = require("./links.js");
 const files = require("./files.js");
@@ -17,4 +17,4 @@ arrayCompleto.then(data =>
 
          mdlinks = () => {
 
-        }
+        }*/
