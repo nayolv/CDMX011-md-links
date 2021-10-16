@@ -5,42 +5,43 @@ const arrayCompleto = validate.validateObj(
   urls.links(files.directorios(process.argv[2]))
 );
 
-const stats = (objComp) => {
+function promiseStats(validateUrl) {//Funcion promesa ejecuta a la fn stats
   return new Promise((res, rej) => {
-    objComp
-      .then((data) => {
-        let array = [];
-        let broken = [];
-        let links = [];
-        let unique = [];
-        data.map((item) => {
-          if (item.href) {
-            links.push(item.href);
-          } else if (item.status == 404) {
-            broken.push(item.href);
-          }
-        });
-        const sortLinks = links.sort();
-        for (let i = 0; i < sortLinks.length; i++) {
-          if (sortLinks[i + 1] !== sortLinks[i]) {
-            unique.push(sortLinks[i]);
-          }
-        }
-
-        array.push({
-          Total: links.length,
-          Broken: broken.length,
-          Unique: unique.length,
-        });
-
-        res(array); //Aquí se resuelve la promesa
-      })
-      .catch((err) => {
-        if (err) {
-          console.log(err);
-        }
-      });
+    res(
+    validateUrl.then((data) => {
+        return stats(data);
+      }));
   });
-};
+}
 
-stats(arrayCompleto).then((data) => console.log(data));
+function stats(objComp) {
+  let links = [];
+  let broken = [];
+  let unique = [];
+  let array = [];
+
+  objComp.map((item) => {
+    
+      links.push(item.href);
+    if (item.status == 404) {//Condicional para saber si un link esta roto
+      broken.push(item.href);
+    }
+  });
+
+  const sortLinks = links.sort(); //Links ordenados
+  for (let i = 0; i < sortLinks.length; i++) {
+    if (sortLinks[i + 1] !== sortLinks[i]) { //Agregamos links diferentes
+      unique.push(sortLinks[i]);
+    }
+  }
+
+  array.push({
+    Total: links.length,
+    Broken: broken.length,
+    Unique: unique.length,
+  });
+  return array
+}
+
+promiseStats(arrayCompleto)
+.then(data => console.log(data))

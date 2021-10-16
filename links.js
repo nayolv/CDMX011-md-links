@@ -8,14 +8,14 @@ let arrayLinks = [];
 
 const links = (file) => {
   file.forEach((item) => {
-    const mdFile = fs.readFileSync(item, "utf-8");
+    const mdFile = fs.readFileSync(item, "utf-8");//Se leen archivos md
 
-    renderer.link = (href, ordered, text) => {
-      if (href.startsWith("http") == true && text.includes("<img") == false) {
-        arrayLinks.push({ href: href, text: text.substr(0, 49), file: item });
+    renderer.link = (href, ordered, text) => {//Método link para token del marked.Renderer
+      if (href.startsWith("http") == true ) {//Verificamos que sean url válidas
+        arrayLinks.push({ href: href, text: text.substr(0, 49), file: item }); //Insertamos objeto en array
       }
     };
-    marked(mdFile, { renderer });
+    marked(mdFile, { renderer }); //Ejecutamos el render
   });
   return arrayLinks;
 };
