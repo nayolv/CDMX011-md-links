@@ -1,4 +1,15 @@
 {
   "name": "md-links",
-  "version": "0.1.0"
+  "version": "0.1.0",
+  "main": "index.js",
+  "bin": {
+    "md-links": "./index.js"
+  },
+  "dependencies": {
+    "arg": "^5.0.1",
+    "jsdom": "^17.0.0",
+    "marked": "^3.0.7",
+    "node-fetch": "^2.0.0",
+    "request": "^2.88.2"
+  }
 }
