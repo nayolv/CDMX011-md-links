@@ -1,36 +1,36 @@
-const validate = require("./validate");
-const urls = require("./links.js");
-const files = require("./files.js");
-const arrayCompleto = validate.validateObj(
-  urls.links(files.directorios(process.argv[2]))
-);
-
-function promiseStats(validateUrl) {//Funcion promesa ejecuta a la fn stats
+const promiseStats = (validateUrl) => {
   return new Promise((res, rej) => {
     res(
-    validateUrl.then((data) => {
+      validateUrl.then((data) => {
         return stats(data);
-      }));
+      })
+    );
+    rej(
+      validateUrl.catch((err) => {
+        console.log(err);
+      })
+    );
   });
-}
+};
 
-function stats(objComp) {
+stats = (objComp) => {
   let links = [];
   let broken = [];
   let unique = [];
   let array = [];
 
   objComp.map((item) => {
-    
+    if(item !== undefined){
       links.push(item.href);
-    if (item.status == 404) {//Condicional para saber si un link esta roto
+    }
+    if (item !== undefined && item.status == 404) {
       broken.push(item.href);
     }
   });
 
-  const sortLinks = links.sort(); //Links ordenados
+  const sortLinks = links.sort();
   for (let i = 0; i < sortLinks.length; i++) {
-    if (sortLinks[i + 1] !== sortLinks[i]) { //Agregamos links diferentes
+    if (sortLinks[i + 1] !== sortLinks[i]) {
       unique.push(sortLinks[i]);
     }
   }
@@ -40,8 +40,7 @@ function stats(objComp) {
     Broken: broken.length,
     Unique: unique.length,
   });
-  return array
-}
+  return array;
+};
 
-promiseStats(arrayCompleto)
-.then(data => console.log(data))
+exports.promiseStats = promiseStats;

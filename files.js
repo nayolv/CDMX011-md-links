@@ -5,22 +5,20 @@ let array = [];
 
 const directorios = (dir) => {
   const absolute = path.resolve(dir); //Ruta absoluta
-  const list = fs.readdirSync(absolute)
+  const list = fs.readdirSync(absolute);
 
-  list.forEach(item =>{
+  list.forEach((item) => {
     const route = path.join(absolute, item); //Concatena ruta con archivo a leer
-    if(fs.statSync(route).isDirectory()){//Verifica si es un directorio
+    if (fs.statSync(route).isDirectory()) {
       directorios(route); //Función recursiva lee dir dentro dir
-    }else if(path.extname(route) == ".md" || //Filtra archivos md
-    path.extname(route) == ".markdown"){
+    } else if (
+      path.extname(route) == ".md" || //Filtra archivos md
+      path.extname(route) == ".markdown"
+    ) {
       array.push(route);
     }
   });
-  return array
+  return array;
 };
 
-module.exports = {
-  directorios,
-};
-
-
+exports.directorios = directorios;

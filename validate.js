@@ -1,15 +1,12 @@
 const fetch = require("node-fetch");
-const urls = require("./links.js");
-const files = require("./files.js");
-//const arr = urls.links(files.directorios(process.argv[2]));
 
-function validateObj(arrayLinks){
+const validateObj = (arrayLinks) => {
   return new Promise((res, rej) => {//Se crea promesa
     res(Promise.all(arrayLinks.map((item) => validate(item))))
   });
 }
 
-const validate = (object) => {
+validate = (object) => {
   
   return fetch(object.href) //Modulo fetch para validar status
     .then((code) => {
@@ -30,6 +27,4 @@ const validate = (object) => {
     });
 }
 
-module.exports = {
-  validateObj,
-};
+exports.validateObj = validateObj;
