@@ -13,7 +13,7 @@ const promiseStats = (validateUrl) => {
   });
 };
 
-stats = (objComp) => {
+const stats = (objComp) => {
   let links = [];
   let broken = [];
   let unique = [];
@@ -36,6 +36,7 @@ stats = (objComp) => {
   }
 
   array.push({
+    Type: 'Statistics.....................................',
     Total: links.length,
     Broken: broken.length,
     Unique: unique.length,
