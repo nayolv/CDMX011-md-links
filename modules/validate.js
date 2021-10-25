@@ -1,12 +1,5 @@
 const fetch = require("node-fetch");
 
-const validateObj = (arrayLinks) => {
-  return new Promise((res, rej) => {//Se crea promesa
-    res(Promise.all(arrayLinks.map((item) => validate(item))))
-    rej('Error')
-  });
-}
-
 const validate = (object) => {
   
   return fetch(object.href) //Modulo fetch para validar status
@@ -28,5 +21,13 @@ const validate = (object) => {
       }
     });
 }
+const validateObj = (arrayLinks) => {
+ return new Promise((res, rej) => {//Se crea promesa
+    res(Promise.all(arrayLinks.map((item) => validate(item))))
+    rej('Error')
+  })
+}
+
+
 
 exports.validateObj = validateObj;
