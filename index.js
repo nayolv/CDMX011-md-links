@@ -1,44 +1,33 @@
 #!/usr/bin/env node
-const minimist = require("minimist");
-const args = minimist(process.argv.slice(2));
-const mdlinksFn = require("./md_links");
-const figlet = require("figlet");
+const mdlinksFn = require("./modules/md_links");
+const gradient = require("gradient-string");
+var figlet = require('figlet');
 const chalk = require("chalk");
 
-const cli = () => {
-  mdlinksFn
-    .mdlinksRes(args)
-    .then((data) => {
-      data.map((item) => {
-        for (const key in item) {
-          const element = item[key];
 
-          for (const value in element) {
-            const result =
-              chalk.bgBlue(value) +
-              ": " +
-              chalk.yellowBright(element[value]) +
-              "\n";
-            console.log(result);
-          }
+const cli = (args) => {
+  mdlinksFn.mdlinksRes(args)
+  .then((data) => {
+    for (let i = 0; i < data.length; i++) {
+      for (let j = 0; j < data[i].length; j++) {
+        const obj = data[i][j];
+        for (const [key, value] of Object.entries(obj)) {
+         console.log(chalk.bold(chalk.yellowBright(key))+': '+ gradient.vice(value),'\n')
         }
-      });
-    })
-    .catch(() => {
-      console.log(
-        chalk.redBright(
-          figlet.textSync("MDLinks", {
-            font: "Standard",
-            horizontalLayout: "default",
-            verticalLayout: "default",
-            width: 100,
-            whitespaceBreak: true,
-          })
-        )
-      );
-      console.log(chalk.bgRed("Enter a path and a command to continue"));
-      console.log(chalk.bgRedBright("         --validate or --stats        "));
-    });
+      }
+    }
+  })
+  .catch(()=>{
+    console.log(gradient.teen(figlet.textSync('MDLinks', {
+      font: 'doom',
+      horizontalLayout: 'default',
+      verticalLayout: 'default',
+      width: 80,
+      whitespaceBreak: true
+  })));
+  console.log(chalk.bgMagentaBright("Enter a path and a command to continue"));
+  console.log(chalk.bgMagentaBright("         --validate or --stats        "));
+  })
 };
 
-cli();
+cli(process.argv[2]);
