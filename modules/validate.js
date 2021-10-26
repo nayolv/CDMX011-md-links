@@ -1,4 +1,6 @@
 const fetch = require("node-fetch");
+/*const files = require("./files");
+const urls = require("./links");*/
 
 const validate = (object) => {
   
@@ -17,7 +19,7 @@ const validate = (object) => {
     })
     .catch((err) => {
       if (err) {
-        object.error = 'Failed validation'
+        console.log(err)
       }
     });
 }
@@ -28,6 +30,7 @@ const validateObj = (arrayLinks) => {
   })
 }
 
-
+/*validateObj(urls.links(files.directorios(process.argv[2])))
+.then(data => console.log(data))*/
 
 exports.validateObj = validateObj;
