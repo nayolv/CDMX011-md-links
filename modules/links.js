@@ -1,27 +1,29 @@
 const fs = require("fs");
 const marked = require("marked");
 const renderer = new marked.Renderer();
+//const files = require("./files")
 
-let arrayLinks = [];
 
 const links = (file) => {
+  let arrayLinks = [];
+
   file.forEach((item) => {
-    const mdFile = fs.readFileSync(item, "utf-8"); //Se leen archivos md
+    const mdFile = fs.readFileSync(item, "utf-8");
 
     renderer.link = (href, ordered, text) => {
-      //Método link para token del marked.Renderer
       if (href.startsWith("http") == true) {
-        //Verificamos que sean url válidas
         arrayLinks.push({
-          Type: "Validation.....................................",
+          type: "Validation.....................................",
           href: href,
           text: text.substr(0, 49),
           file: item,
-        }); //Insertamos objeto en array
+        });
       }
     };
-    marked(mdFile, { renderer }); //Ejecutamos el render
+    marked(mdFile, { renderer });
   });
+//  console.log(arrayLinks)
+
   return arrayLinks;
 };
 

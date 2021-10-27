@@ -4,7 +4,6 @@ const gradient = require("gradient-string");
 var figlet = require('figlet');
 const chalk = require("chalk");
 
-
 const cli = (args) => {
   mdlinksFn.mdlinksRes(args)
   .then((data) => {

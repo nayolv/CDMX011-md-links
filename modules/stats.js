@@ -1,23 +1,11 @@
-const promiseStats = (validateUrl) => {
-  return new Promise((res, rej) => {
-    res(
-      validateUrl.then((data) => {
-        return stats(data);
-      })
-    );
-    rej(
-      validateUrl.catch((err) => {
-        console.log(err);
-      })
-    );
-  });
-};
-
-const stats = (objComp) => {
+/*const files = require("./files");
+const urls = require("./links");
+const validate = require("./validate");
+*/
+const stats = (objComp, array=[]) => {
   let links = [];
   let broken = [];
   let unique = [];
-  let array = [];
 
   objComp.map((item) => {
     if(item !== undefined){
@@ -43,5 +31,23 @@ const stats = (objComp) => {
   });
   return array;
 };
+
+const promiseStats = (validateUrl) => {
+  return new Promise((res, rej) => {
+    res(
+      validateUrl.then((data) => {
+        return stats(data);
+      })
+    );
+    rej(
+      validateUrl.catch((err) => {
+        console.log(err);
+      })
+    );
+  });
+};
+/*
+promiseStats(validate.validateObj(urls.links(files.directorios(process.argv[2]))))
+.then(data=>console.log(data));*/
 
 exports.promiseStats = promiseStats;
