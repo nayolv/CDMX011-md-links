@@ -18,11 +18,14 @@ const validate = (object) => {
       }
     })
     .catch((err) => {
-      if (err) {
-        console.log(err)
+      if (err.code) {
+        object.status = "Failed to validate url"
+        object.message = "fail"
+        return object
       }
     });
 }
+
 const validateObj = (arrayLinks) => {
  return new Promise((res, rej) => {//Se crea promesa
     res(Promise.all(arrayLinks.map((item) => validate(item))))

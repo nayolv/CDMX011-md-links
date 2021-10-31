@@ -11,7 +11,7 @@ const cli = (args) => {
       for (let j = 0; j < data[i].length; j++) {
         const obj = data[i][j];
         for (const [key, value] of Object.entries(obj)) {
-         console.log(chalk.bold(chalk.yellowBright(key))+': '+ gradient.vice(value),'\n')
+         console.log('\n',chalk.bold(chalk.yellowBright(key))+': '+ gradient.vice(value),'\n')
         }
       }
     }
