@@ -57,3 +57,7 @@ Por ahora solo se ha testeado su funcionalidad en Windows.
 `"marked": "^3.0.7"`
 
 `"node-fetch": "^2.6.5"`
+
+## 5. Diagrama de flujo
+
+![Diagrama](diagrama.png)
