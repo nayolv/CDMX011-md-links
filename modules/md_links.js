@@ -7,12 +7,15 @@ const program = require("commander");
 const mdlinks = (args) => {
   const validateFn = validate.validateObj(urls.links(files.directorios(args)));
   const statsFn = stats.promiseStats(validateFn);
+
   program.option("-s, --stats", "statistics for md files");
   program.option("-v, --validate", "validation for status url");
-
+  program.showHelpAfterError("add --help or -h for additional information");
+  program.showSuggestionAfterError();
   program.parse();
-
+  
   const options = program.opts();
+
   if (options.validate && options.stats) return [validateFn, statsFn];
   if (options.validate) return [validateFn];
   if (options.stats) return [statsFn];
