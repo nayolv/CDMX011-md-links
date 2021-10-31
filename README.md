@@ -31,13 +31,13 @@ Unique: 3
 ```
 
 ## 2. Indicaciones
-**Instala la dependendcia con npm install md-links-nay**
+* **Modulo instalable =>** `npm install md-links-nay.`
 
-**Elige tu ruta puede ser absoluta o relativa, la herramienta puede analizar 
+* **Elige tu ruta puede ser absoluta o relativa, la herramienta puede analizar 
 archivos individuales o puedes pasarle una carpeta y te devolvera todos los 
-links que encuentre en cada archivo que exista en dicho fichero**
+links que encuentre en cada archivo que exista en dicho fichero.**
 
-**Usa las banderas --validate o --stats dependiendo lo que desees obtener, también 
+* **Usa las banderas --validate o --stats dependiendo lo que desees obtener, también 
 puedes combinarlas o usar solo -v o -s**
 
 
@@ -47,17 +47,17 @@ Por ahora solo se ha testeado su funcionalidad en Windows.
 
 ## 4. Módulos empleados
 
-`"chalk": "^4.1.2"`
+* `"chalk": "^4.1.2"`
 
-`"commander": "^8.3.0"`    
+* `"commander": "^8.3.0"`    
 
-`"figlet": "^1.5.2"`
+* `"figlet": "^1.5.2"`
 
-`"gradient-string": "^1.2.0"`
+* `"gradient-string": "^1.2.0"`
 
-`"marked": "^3.0.7"`
+* `"marked": "^3.0.7"`
 
-`"node-fetch": "^2.6.5"`
+* `"node-fetch": "^2.6.5"`
 
 ## 5. Diagrama de flujo
 
