@@ -6,6 +6,7 @@
 * [2. Indicaciones](#2-indicaciones)
 * [3. Sistemas operativos](#3-sistemas-operativos)
 * [4. Módulos empleados](#4-módulos-empleados)
+* [5. Diagrama de flujo](#4-diagrama-de-flujo)
 
 ***
 
